@@ -7,14 +7,18 @@ app.get('/games', (request, response) => {
 });
 
 app.post('/ads', (request, response) => {
-  return response.json([]);
+  return response.status(204).json([]);
 });
 
-app.get('/ads', (request, response) => {
-  return response.json([
-    { id: 1, name: 'anuncio 1' },
-    { id: 2, name: 'anuncio 2' },
-  ]);
+app.get('/games/:id/ads', (request, response) => {
+  const gameId = request.params.id;
+
+  return response.json({ gameId });
+});
+
+app.get('/ads/:id/discord', (request, response) => {
+  const adId = request.params.id;
+  return response.json([]);
 });
 
 app.listen(3333);
