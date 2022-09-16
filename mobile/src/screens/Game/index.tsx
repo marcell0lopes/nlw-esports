@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Text,
   FlatList,
   Image,
   ScrollView,
@@ -67,7 +68,7 @@ export function Game() {
 
           <View style={styles.right} />
         </View>
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ margin: 0, padding: 0 }}>
           <Image
             source={{ uri: game.bannerUrl }}
             style={styles.cover}
@@ -85,7 +86,19 @@ export function Game() {
               <DuoCard onConnect={() => {}} data={item} />
             )}
             style={styles.listContainer}
-            contentContainerStyle={styles.contentList}
+            contentContainerStyle={[
+              styles.contentList,
+              duos.length === 0 && {
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+              },
+            ]}
+            ListEmptyComponent={() => (
+              <Text style={styles.emptyListText}>
+                Não há anúncioos publicados ainda.
+              </Text>
+            )}
           />
         </ScrollView>
       </SafeAreaView>
